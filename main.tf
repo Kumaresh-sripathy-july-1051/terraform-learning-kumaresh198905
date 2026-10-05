@@ -1,17 +1,35 @@
+terraform {
+ required_providers {
+   google = {
+     source  = "hashicorp/google"
+     version = "8.4.0"
+   }
+ }
+}
+
 provider "google" {
-  project     = "firm-structure-442106-h8"
-  region      = "us-central1"
+ project = var.project_id
+ region  = var.region
 }
 
-resource "google_storage_bucket" "static-site-test-kum" {
-  name          = "image-kuma-001a2s"
-  location      = "us-central1"
-  force_destroy = true
+resource "google_storage_bucket" "static_site_test" {
+ name          = var.bucket_name
+ location      = var.bucket_location
+ force_destroy = var.force_destroy
 }
 
-resource "google_compute_instance" "default-kum-yes" {
-  name         = "instance-kuma-0010q02"
-  machine_type = "n2-standard-2"
-  zone         = "us-central1-c"
-}
+resource "google_compute_instance" "vm" {
+ name         = var.vm_name
+ machine_type = var.machine_type
+ zone         = var.zone
 
+ boot_disk {
+   initialize_params {
+     image = var.boot_disk_image
+   }
+ }
+
+ network_interface {
+   network = var.network
+ }
+}
