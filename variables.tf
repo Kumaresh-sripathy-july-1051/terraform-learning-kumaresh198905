@@ -6,6 +6,12 @@ variable "region" {
  type = string
 }
 
+variable "project_labels" {
+ description = "Labels to apply to GCP resources"
+ type        = map(string)
+ default     = {}
+}
+
 variable "bucket_name" {
  type = string
 }
@@ -31,9 +37,11 @@ variable "zone" {
 }
 
 variable "boot_disk_image" {
- type = string
+ description = "Boot disk image for the VM"
+ type        = string
 }
 
 variable "network" {
- type = string
+ description = "VPC network name or self-link"
+ type        = string
 }

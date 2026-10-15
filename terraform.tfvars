@@ -11,3 +11,9 @@ zone            = "us-central1-a"
 
 boot_disk_image = "debian-cloud/debian-12"
 network         = "default"
+
+project_labels = {
+ environment = "test"
+ team        = "devops"
+ cost_center = "engineering"
+}

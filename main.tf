@@ -23,6 +23,8 @@ resource "google_compute_instance" "vm" {
  machine_type = var.machine_type
  zone         = var.zone
 
+labels = local.common_labels
+
  boot_disk {
    initialize_params {
      image = var.boot_disk_image
@@ -32,4 +34,10 @@ resource "google_compute_instance" "vm" {
  network_interface {
    network = var.network
  }
+}
+
+resource "google_service_account" "my_sa" {
+ account_id   = "my-project-151026-1051"
+ display_name = "my-project-151026-1051"
+ project      = var.project_id
 }
